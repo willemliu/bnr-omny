@@ -33,7 +33,7 @@ jobs:
 #        echo PODCAST_URL=${{ secrets.PODCAST_URL }} >> .env
     - name: Set environment variable
       id: podcast_url
-      run: echo "PODCAST_URL=${{ secret.PODCAST_URL }}" >> $GITHUB_ENV
+      run: echo "PODCAST_URL=${{ secrets.PODCAST_URL }}" >> $GITHUB_ENV
     - name: Build
       run: npm run build
       continue-on-error: true
