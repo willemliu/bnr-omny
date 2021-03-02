@@ -1,0 +1,18 @@
+.podcast {
+    border: 1px solid var(--dividers);
+    display: flex;
+    flex-direction: column;
+
+    .details {
+        display: flex;
+
+        img {
+            max-width: 200px;
+            flex: 0 1 auto;
+        }
+
+        .textContent {
+            flex: 1 1 auto;
+        }
+    }
+}
