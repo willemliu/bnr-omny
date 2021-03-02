@@ -26,11 +26,6 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
-#     - name: Create env file
-#       run: |
-#         touch .env
-#         echo PODCAST_URL="${{ secrets.PODCAST_URL }}" >> .env
-#         cat .env
     - name: Build
       run: npm run build
       env:
