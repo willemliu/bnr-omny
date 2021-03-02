@@ -14,7 +14,7 @@ function Page(props: any) {
                 />
             ) : null}
             <h1>BNR</h1>
-            <p>{props.description}</p>
+            <p>{props?.description}</p>
             {props?.items?.map((podcast) => {
                 return <Podcast key={podcast.guid} {...podcast} />;
             })}
@@ -29,7 +29,7 @@ export const getStaticProps = async () => {
             item: ['media:content', 'omny:clipId'],
         },
     });
-    const props = await parser.parseURL(process.env.PODCAST_URL);
+    const props = (await parser.parseURL(process?.env?.PODCAST_URL)) ?? {};
 
     return {
         props,

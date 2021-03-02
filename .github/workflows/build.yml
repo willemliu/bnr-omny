@@ -27,13 +27,8 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
-    - name: create env file
-      run: |
-        touch .env
-        echo PODCAST_URL=${{ secrets.PODCAST_URL }} >> .env
     - name: Build
       run: npm run build
-      continue-on-error: true
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:
