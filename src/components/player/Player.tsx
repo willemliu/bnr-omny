@@ -18,11 +18,11 @@ function Player(props: Props) {
     }, []);
 
     useEffect(() => {
-        if (iframeRef.current) {
+        if (iframeRef.current && audioPlayer) {
             const player = new audioPlayer.Player(iframeRef.current);
             player.on('ready', () => player.play());
         }
-    }, [audioUrl, iframeRef]);
+    }, [audioUrl, iframeRef, audioPlayer]);
 
     useEffect(() => {
         const subId = PlayerStore.subscribe(() => {
