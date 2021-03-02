@@ -9,14 +9,19 @@ interface Props {
 function Player(props: Props) {
     const iframeRef = useRef(null);
     const [audioUrl, setAudioUrl] = useState(props.url);
+    const [audioPlayer, setAudioPlayer] = useState(null);
 
     useEffect(() => {
         import('player.js').then(({ default: playerjs }) => {
-            if (iframeRef.current) {
-                const player = new playerjs.Player(iframeRef.current);
-                player.on('ready', () => player.play());
-            }
+            setAudioPlayer(playerjs);
         });
+    }, []);
+
+    useEffect(() => {
+        if (iframeRef.current) {
+            const player = new audioPlayer.Player(iframeRef.current);
+            player.on('ready', () => player.play());
+        }
     }, [audioUrl, iframeRef]);
 
     useEffect(() => {
