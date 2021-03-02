@@ -27,7 +27,9 @@ jobs:
     - name: Test
       run: npm test
     - name: ECHO1
-      run: echo ${ secrets.PODCAST_URL }
+      run: echo ${{ secrets.PODCAST_URL }}
+      with:
+        PODCAST_URL: ${{ secrets.PODCAST_URL }}
     - name: ECHO2
       run: echo ${{ secrets.PODCAST_URL }}
     - name: Create env file
