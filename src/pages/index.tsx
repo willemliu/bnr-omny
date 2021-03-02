@@ -29,7 +29,12 @@ export const getStaticProps = async () => {
             item: ['media:content', 'omny:clipId'],
         },
     });
-    const props = (await parser.parseURL(process?.env?.PODCAST_URL)) ?? {};
+    let props = {};
+    try {
+        props = await parser.parseURL(process.env.PODCAST_URL);
+    } catch (e) {
+        console.error(process.env.PODCAST_URL, e);
+    }
 
     return {
         props,
