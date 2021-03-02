@@ -29,6 +29,7 @@ jobs:
       run: npm run build
       env:
         PODCAST_URL: ${{secrets.PODCAST_URL}}
+      continue-on-error: true
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:
