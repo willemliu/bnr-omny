@@ -5,8 +5,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PODCAST_URL: ${{secrets.PODCAST_URL}}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
