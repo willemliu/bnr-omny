@@ -30,6 +30,11 @@ jobs:
       with:
         envkey_PODCAST_URL: ${{ secrets.PODCAST_URL }}
         file_name: .env
+    - name: Create env file
+      run: |
+        touch .env
+        echo PODCAST_URL="${{ secrets.PODCAST_URL }}" >> .env
+        cat .env
     - name: Build
       run: npm run build
     - name: Code coverage reporting
