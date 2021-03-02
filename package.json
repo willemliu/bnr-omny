@@ -9,6 +9,7 @@
         "lint": "eslint \"src/**\"",
         "json-to-scss": "json-to-scss public/assets/design-tokens/* src/scss/design-tokens",
         "prettier": "prettier -c **/*.ts?",
+        "vc:rm": "vc rm bnr-omny --safe --yes",
         "start": "next start",
         "test": "echo \"Error: no test specified\" && exit 0"
     },
