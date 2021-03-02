@@ -27,6 +27,11 @@ jobs:
       run: npm ci
     - name: Test
       run: npm test
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_PODCAST_URL: ${{ secrets.PODCAST_URL }}
+        file_name: .env
     - name: Build
       run: npm run build
     - name: Code coverage reporting
