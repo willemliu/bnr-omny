@@ -10,7 +10,7 @@
         "json-to-scss": "json-to-scss public/assets/design-tokens/* src/scss/design-tokens",
         "prettier": "prettier -c **/*.ts?",
         "start": "next start",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 0"
     },
     "repository": {
         "type": "git",
