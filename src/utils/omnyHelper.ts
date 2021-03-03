@@ -119,10 +119,12 @@ export async function getProgramDetails(
 
 export async function getProgramClips(
     orgId: string,
-    programId: string
+    programId: string,
+    cursor = 1,
+    pageSize = 10
 ): Promise<Clips> {
     return await fetch(
-        `https://omny.fm/api/orgs/${orgId}/programs/${programId}/clips`
+        `https://omny.fm/api/orgs/${orgId}/programs/${programId}/clips?cursor=${cursor}&pageSize=${pageSize}`
     ).then((res) => res.json());
 }
 

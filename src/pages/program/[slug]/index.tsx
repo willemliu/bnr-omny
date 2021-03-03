@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import {
@@ -8,9 +9,10 @@ import {
     getPrograms,
     Program,
     Programs,
-} from '../../utils/omnyHelper';
+} from '../../../utils/omnyHelper';
 import styles from './Program.module.scss';
-import { Clip as ClipComponent } from '../../components/clip/Clip';
+import { Clip as ClipComponent } from '../../../components/clip/Clip';
+import Link from 'next/link';
 
 interface Props {
     programDetails: Program;
@@ -20,6 +22,17 @@ interface Props {
 }
 
 function Page(props: Props) {
+    const hasPrev = useCallback(() => {
+        return props?.programClips?.Cursor > 1;
+    }, [props?.programClips?.Cursor]);
+
+    const hasNext = useCallback(() => {
+        return (
+            props?.programClips?.Cursor * 10 + 10 <
+            props?.programClips?.TotalCount
+        );
+    }, [props?.programClips?.Cursor, props?.programClips?.TotalCount]);
+
     return (
         <section className={styles.program}>
             {props?.programDetails ? (
@@ -43,17 +56,38 @@ function Page(props: Props) {
                 </section>
             ) : null}
 
-            {props?.programClips?.TotalCount > 0 ? (
-                <section className={styles.clips}>
-                    {props?.programClips?.Clips?.map?.((clip) => {
-                        return (
-                            <ClipComponent
-                                key={`${clip.EmbedUrl}`}
-                                clip={clip}
-                            />
-                        );
-                    })}
-                </section>
+            {props?.programClips?.TotalCount ? (
+                <>
+                    <p>
+                        {hasPrev() ? (
+                            <Link
+                                href={`/program/${props?.programDetails.Slug}/${
+                                    props?.programClips?.Cursor - 2
+                                }`}
+                            >
+                                <button>&lt;</button>
+                            </Link>
+                        ) : null}
+                        Page {props?.programClips?.Cursor - 1}{' '}
+                        {hasNext() ? (
+                            <Link
+                                href={`/program/${props?.programDetails.Slug}/${props?.programClips?.Cursor}`}
+                            >
+                                <button>&gt;</button>
+                            </Link>
+                        ) : null}
+                    </p>
+                    <section className={styles.clips}>
+                        {props?.programClips?.Clips?.map?.((clip) => {
+                            return (
+                                <ClipComponent
+                                    key={`${clip.EmbedUrl}`}
+                                    clip={clip}
+                                />
+                            );
+                        })}
+                    </section>
+                </>
             ) : (
                 <div>Geen clips</div>
             )}
@@ -73,6 +107,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+    const page = (context.params.page as string) ?? '1';
     const programs = await getPrograms(process.env.OMNY_ORGID);
     const program = programs.Programs.find(
         (program) => program.Slug === context.params.slug
@@ -83,7 +118,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     );
     const programClips = await getProgramClips(
         process.env.OMNY_ORGID,
-        program.Id
+        program.Id,
+        parseInt(page, 10)
     );
 
     return {
