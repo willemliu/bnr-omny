@@ -23,7 +23,7 @@ interface Props {
 
 function Page(props: Props) {
     const hasPrev = useCallback(() => {
-        return props?.programClips?.Cursor > 1;
+        return props?.programClips?.Cursor > 2;
     }, [props?.programClips?.Cursor]);
 
     const hasNext = useCallback(() => {
