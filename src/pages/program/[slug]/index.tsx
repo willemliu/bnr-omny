@@ -15,6 +15,7 @@ import { Clip as ClipComponent } from '../../../components/clip/Clip';
 import Link from 'next/link';
 
 interface Props {
+    page?: number;
     programDetails: Program;
     programClips: Clips;
     Programs: Programs;
@@ -23,15 +24,12 @@ interface Props {
 
 function Page(props: Props) {
     const hasPrev = useCallback(() => {
-        return props?.programClips?.Cursor > 2;
-    }, [props?.programClips?.Cursor]);
+        return props?.page > 1;
+    }, [props?.page]);
 
     const hasNext = useCallback(() => {
-        return (
-            props?.programClips?.Cursor * 10 + 10 <
-            props?.programClips?.TotalCount
-        );
-    }, [props?.programClips?.Cursor, props?.programClips?.TotalCount]);
+        return props?.programClips?.Cursor > props?.page;
+    }, [props?.programClips?.Cursor, props?.page]);
 
     return (
         <section className={styles.program}>
@@ -62,13 +60,15 @@ function Page(props: Props) {
                         {hasPrev() ? (
                             <Link
                                 href={`/program/${props?.programDetails.Slug}/${
-                                    props?.programClips?.Cursor - 2
+                                    props?.page - 1
                                 }`}
                             >
                                 <button>&lt;</button>
                             </Link>
                         ) : null}
-                        Page {props?.programClips?.Cursor - 1}{' '}
+                        {props?.programClips?.TotalCount > 10
+                            ? `Page ${props?.page}`
+                            : null}
                         {hasNext() ? (
                             <Link
                                 href={`/program/${props?.programDetails.Slug}/${props?.programClips?.Cursor}`}
@@ -127,6 +127,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             programDetails,
             programClips,
             Programs: programs,
+            page,
         },
         revalidate: 10,
     };
