@@ -19,7 +19,7 @@ export type Program = {
     Network: string; // The name of the network group of the program.
 };
 
-export interface Programs extends Cursor {
+export interface Programs {
     Programs: Program[];
 }
 

@@ -6,7 +6,7 @@ import './_app.scss';
 function App({ Component, pageProps }) {
     return (
         <>
-            <Menu items={pageProps.Programs} />
+            <Menu Programs={pageProps.Programs} />
             <Component {...pageProps} />
             <Player url={pageProps?.audioUrl} />
         </>

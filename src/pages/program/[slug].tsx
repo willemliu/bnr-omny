@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         props: {
             programDetails,
             programClips,
-            Programs: programs.Programs,
+            Programs: programs,
         },
         revalidate: 10,
     };
