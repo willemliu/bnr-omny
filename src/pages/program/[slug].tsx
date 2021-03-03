@@ -22,22 +22,26 @@ interface Props {
 function Page(props: Props) {
     return (
         <section className={styles.program}>
-            <section className={styles.programDetail}>
-                <span className={styles.image}>
-                    <Image
-                        src={props.programDetails.ArtworkUrl}
-                        layout={'responsive'}
-                        width={1}
-                        height={1}
-                        objectFit={'cover'}
-                    />
-                </span>
-                <section className={styles.textContent}>
-                    <h1>{props.programDetails.Name}</h1>
-                    <p>{props.programDetails.Network}</p>
-                    <p>{props.programDetails.Description}</p>
+            {props?.programDetails ? (
+                <section className={styles.programDetail}>
+                    {props?.programDetails?.ArtworkUrl ? (
+                        <span className={styles.image}>
+                            <Image
+                                src={props?.programDetails?.ArtworkUrl}
+                                layout={'responsive'}
+                                width={1}
+                                height={1}
+                                objectFit={'cover'}
+                            />
+                        </span>
+                    ) : null}
+                    <section className={styles.textContent}>
+                        <h1>{props.programDetails.Name}</h1>
+                        <p>{props.programDetails.Network}</p>
+                        <p>{props.programDetails.Description}</p>
+                    </section>
                 </section>
-            </section>
+            ) : null}
 
             {props?.programClips?.TotalCount > 0 ? (
                 <section className={styles.clips}>
