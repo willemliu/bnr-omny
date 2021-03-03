@@ -1,0 +1,50 @@
+@import '../../scss/utils/map-deep-get.scss';
+@import '../../scss/design-tokens/colors.scss';
+@import '../../scss/design-tokens/media.scss';
+@import '../../scss/design-tokens/typography.scss';
+
+.program {
+    margin: 1rem;
+
+    .programDetail {
+        display: flex;
+        margin: 1rem 0;
+        .image {
+            display: inline-block;
+            flex: 0 1 auto;
+            overflow: hidden;
+            > div {
+                width: 100px;
+            }
+        }
+        .textContent {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        border: 1px solid var(--dividers);
+    }
+
+    .clips {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: 1rem;
+        row-gap: 1rem;
+
+        > * {
+            grid-column-end: span 12;
+            @media screen and (min-width: map-deep-get($media, 'sizes', 's')) {
+                grid-column-end: span 6;
+            }
+            @media screen and (min-width: map-deep-get($media, 'sizes', 'm')) {
+                grid-column-end: span 4;
+            }
+            @media screen and (min-width: map-deep-get($media, 'sizes', 'l')) {
+                grid-column-end: span 3;
+            }
+            @media screen and (min-width: map-deep-get($media, 'sizes', 'xl')) {
+                grid-column-end: span 3;
+            }
+        }
+    }
+}

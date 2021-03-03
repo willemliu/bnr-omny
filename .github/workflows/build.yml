@@ -28,7 +28,7 @@ jobs:
     - name: Build
       run: npm run build
       env:
-        PODCAST_URL: ${{ secrets.PODCAST_URL }}
+        OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:
