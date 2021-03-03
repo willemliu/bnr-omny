@@ -9,7 +9,7 @@ interface Props {
 function Menu(props: Props) {
     return (
         <nav className={styles.menu}>
-            {props?.Programs.Programs?.map?.((item) => {
+            {props?.Programs?.Programs?.map?.((item) => {
                 return (
                     <Link key={item.Id} href={`/program/${item.Slug}`}>
                         <a>{item.Name}</a>
