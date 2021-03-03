@@ -10,7 +10,7 @@ import {
     Programs,
 } from '../../utils/omnyHelper';
 import styles from './Program.module.scss';
-import { Program as ProgramComponent } from '../../components/program/Program';
+import { Clip as ClipComponent } from '../../components/clip/Clip';
 
 interface Props {
     programDetails: Program;
@@ -47,7 +47,7 @@ function Page(props: Props) {
                 <section className={styles.clips}>
                     {props?.programClips?.Clips?.map?.((clip) => {
                         return (
-                            <ProgramComponent
+                            <ClipComponent
                                 key={`${clip.EmbedUrl}`}
                                 clip={clip}
                             />

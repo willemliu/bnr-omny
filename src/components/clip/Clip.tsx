@@ -1,19 +1,19 @@
 import React from 'react';
 import PlayerStore from '../../stores/PlayerStore';
-import { Clip } from '../../utils/omnyHelper';
-import styles from './Program.module.scss';
+import { Clip as ClipType } from '../../utils/omnyHelper';
+import styles from './Clip.module.scss';
 
 interface Props {
-    clip: Clip;
+    clip: ClipType;
 }
 
-function Program(props: Props) {
+function Clip(props: Props) {
     function handleClick() {
         PlayerStore.setAudioUrl(props.clip.EmbedUrl);
     }
 
     return (
-        <article className={styles.program}>
+        <article className={styles.clip}>
             <section className={styles.details}>
                 <img src={props.clip.ImageUrl} />
                 <section className={styles.textContent}>
@@ -28,4 +28,4 @@ function Program(props: Props) {
     );
 }
 
-export { Program };
+export { Clip };
