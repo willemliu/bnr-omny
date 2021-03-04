@@ -29,6 +29,9 @@ jobs:
       run: npm run build
       env:
         OMNY_ORGID: ${{ secrets.OMNY_ORGID }}
+        SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+        SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+        SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
     - name: Code coverage reporting
       uses: coverallsapp/github-action@master
       with:
