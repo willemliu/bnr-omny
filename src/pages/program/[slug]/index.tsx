@@ -79,6 +79,7 @@ function Page(props: Props) {
                     </p>
                     <section className={styles.clips}>
                         {props?.programClips?.Clips?.map?.((clip) => {
+                            console.log(clip.DescriptionHtml);
                             return (
                                 <ClipComponent
                                     key={`${clip.EmbedUrl}`}

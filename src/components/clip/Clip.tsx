@@ -5,10 +5,10 @@ import styles from './Clip.module.scss';
 
 interface Props {
     clip: ClipType;
+    [x: string]: any;
 }
 
 function Clip(props: Props) {
-    console.log(props.clip);
     function handleClick() {
         PlayerStore.setAudioUrl(props.clip.EmbedUrl);
     }
@@ -21,7 +21,7 @@ function Clip(props: Props) {
                     <h1>{props.clip.Title}</h1>
                     <time>{props.clip.PublishedUtc}</time>
                     <p>{props.clip.PublishedUrl}</p>
-                    <p
+                    <div
                         dangerouslySetInnerHTML={{
                             __html: props.clip.DescriptionHtml,
                         }}
