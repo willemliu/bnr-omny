@@ -8,6 +8,7 @@ interface Props {
 }
 
 function Clip(props: Props) {
+    console.log(props.clip);
     function handleClick() {
         PlayerStore.setAudioUrl(props.clip.EmbedUrl);
     }
@@ -20,7 +21,11 @@ function Clip(props: Props) {
                     <h1>{props.clip.Title}</h1>
                     <time>{props.clip.PublishedUtc}</time>
                     <p>{props.clip.PublishedUrl}</p>
-                    <p>{props.clip.Description}</p>
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: props.clip.DescriptionHtml,
+                        }}
+                    />
                 </section>
             </section>
             <button onClick={handleClick}>Play</button>
