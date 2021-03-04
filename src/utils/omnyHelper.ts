@@ -69,6 +69,7 @@ type RecordingMetadata = {
 };
 
 export type Clip = {
+    Id: string;
     Title: string; // The title of the clip.
     Description: string; // The description of the clip (without any HTML formatting).
     DescriptionHtml: string; // The description of the clip (with HTML formatting).

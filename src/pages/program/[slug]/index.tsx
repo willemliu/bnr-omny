@@ -11,8 +11,9 @@ import {
     Programs,
 } from '../../../utils/omnyHelper';
 import styles from './Program.module.scss';
-import { Clip as ClipComponent } from '../../../components/clip/Clip';
 import Link from 'next/link';
+import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
+import PlayerStore from '../../../stores/PlayerStore';
 
 interface Props {
     page?: number;
@@ -30,6 +31,12 @@ function Page(props: Props) {
     const hasNext = useCallback(() => {
         return props?.programClips?.Cursor > props?.page;
     }, [props?.programClips?.Cursor, props?.page]);
+
+    function handleClick(clip, e: React.MouseEvent<HTMLButtonElement>) {
+        console.log(e);
+        e.preventDefault();
+        PlayerStore.setAudioUrl(clip.EmbedUrl);
+    }
 
     return (
         <section className={styles.program}>
@@ -80,9 +87,22 @@ function Page(props: Props) {
                     <section className={styles.clips}>
                         {props?.programClips?.Clips?.map?.((clip) => {
                             return (
-                                <ClipComponent
+                                <VerticalCard1
                                     key={`${clip.EmbedUrl}`}
-                                    clip={clip}
+                                    date={clip.PublishState}
+                                    duration={`${Math.ceil(
+                                        clip.DurationSeconds / 60
+                                    )}min.`}
+                                    href={`/clip/${clip.Id}`}
+                                    imageUrl={clip.ImageUrl}
+                                    madePossibleBy="mij"
+                                    madePossibleLink="https://bnr.nl"
+                                    madePossibleByPrefix="Een podcast van"
+                                    title={clip.Title}
+                                    Link={Link}
+                                    onClick={handleClick.bind(null, clip)}
+                                    footerText={props?.programDetails?.Name}
+                                    footerUrl={`/program/${props?.programDetails?.Slug}`}
                                 />
                             );
                         })}

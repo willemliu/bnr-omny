@@ -24,6 +24,7 @@
     },
     "homepage": "https://github.com/willemliu/bnr-omny#readme",
     "devDependencies": {
+        "@fdmg/bnr-design-system": "^0.1.5-canary.8",
         "@sanity/client": "^2.2.6",
         "@sanity/image-url": "^0.140.22",
         "@types/node": "^14.14.31",

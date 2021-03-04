@@ -8,6 +8,7 @@ module.exports = {
             'bnr-external-acc.imgix.net',
             'bnr-external-prod.imgix.net',
             'www.omnycontent.com',
+            'cdn.sanity.io',
         ],
     },
     env: {
