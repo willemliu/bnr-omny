@@ -54,9 +54,24 @@ function Page(props: Props) {
                         </span>
                     ) : null}
                     <section className={styles.textContent}>
-                        <h1>{props.programDetails.Name}</h1>
-                        <p>{props.programDetails.Network}</p>
-                        <p>{props.programDetails.Description}</p>
+                        {Object.keys(props?.programDetails).map((key) => {
+                            switch (key) {
+                                case 'DescriptionHtml':
+                                    return (
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: `${key}: ${props.programDetails.DescriptionHtml}`,
+                                            }}
+                                        />
+                                    );
+                                default:
+                                    return (
+                                        <div key={key}>
+                                            {key}: {props?.programDetails[key]}
+                                        </div>
+                                    );
+                            }
+                        })}
                     </section>
                 </section>
             ) : null}

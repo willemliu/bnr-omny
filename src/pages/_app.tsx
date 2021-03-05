@@ -8,11 +8,11 @@ import '@fdmg/bnr-design-system/components/card/VerticalCard1.css';
 
 function App({ Component, pageProps }) {
     return (
-        <>
+        <section className="body-text sans xs">
             <Menu Programs={pageProps.Programs} />
             <Component {...pageProps} />
             <Player url={pageProps?.audioUrl} />
-        </>
+        </section>
     );
 }
 export default App;

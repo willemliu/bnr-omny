@@ -8,17 +8,24 @@ export type Program = {
     Name: string; // The name of the program.
     Slug: string; // The URL slug of the program. The Omny.fm show page can be accessed in the format https://omny.fm/shows/{Slug}.
     Description: string; // The description of the program.
+    DescriptionHtml: string;
+    Author: string;
+    Copyright: string;
     Publisher: string; // The publisher of the program.
     ArtworkUrl: string; // A publicly-accessible URL to the artwork image for this program. The size parameter specifies the image size (default size is medium). Valid size parameters are: thumbnail (64x64), small (256x256), medium (600x600) and large (3000x3000).
     Category: string; // The category of the program.
+    Categories: string[];
     SocialWeb: string; // The web URL of the program.
     SocialTwitter: string; // The Twitter account username of the program (should be accessed in the format https://twitter.com/{SocialTwitter}).
     SocialFacebook: string; // The Facebook page username of the program (should be accessed in the format https://fb.com/{SocialFacebook}).
     Hidden: boolean; // If true, the program should be considered "private" and should not be shown in public directories or indexed. (Private programs are not available in the consumer API).
     Archived: boolean; // If true, the program should be considered an archive and will not be actively updated.
     Network: string; // The name of the network group of the program.
+    NetworkId: string;
+    ExternalId: string;
     ContactName: string;
     ContactEmail: string;
+    DefaultPlaylistId: string;
 };
 
 export interface Programs {
