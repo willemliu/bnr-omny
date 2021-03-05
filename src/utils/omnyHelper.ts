@@ -17,6 +17,8 @@ export type Program = {
     Hidden: boolean; // If true, the program should be considered "private" and should not be shown in public directories or indexed. (Private programs are not available in the consumer API).
     Archived: boolean; // If true, the program should be considered an archive and will not be actively updated.
     Network: string; // The name of the network group of the program.
+    ContactName: string;
+    ContactEmail: string;
 };
 
 export interface Programs {

@@ -1,3 +1,4 @@
+import { VerticalCard1 } from '@fdmg/bnr-design-system/components/card/VerticalCard1';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React from 'react';
@@ -11,20 +12,27 @@ interface Props {
 function Page(props: Props) {
     return (
         <section className={styles.page}>
-            <h1>BNR</h1>
+            <h1 className="heading sans xl">BNR</h1>
 
             {props?.Programs?.Programs?.length > 0 ? (
-                <ul>
+                <section className="grid">
                     {props?.Programs?.Programs?.map((program) => {
                         return (
-                            <li key={program.Id}>
-                                <Link href={`/program/${program.Slug}`}>
-                                    <a>{program.Name}</a>
-                                </Link>
-                            </li>
+                            <VerticalCard1
+                                key={program.Id}
+                                className={`${styles.fullHeight} xs-12 s-6 m-4 l-3`}
+                                href={`/program/${program.Slug}`}
+                                imageUrl={program.ArtworkUrl}
+                                madePossibleBy={program.ContactName}
+                                madePossibleLink={`mailto:${program.ContactEmail}`}
+                                title={program.Name}
+                                Link={Link}
+                                footerText={program.Name}
+                                footerUrl={`/program/${program.Slug}`}
+                            />
                         );
                     })}
-                </ul>
+                </section>
             ) : null}
         </section>
     );

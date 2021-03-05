@@ -84,11 +84,12 @@ function Page(props: Props) {
                             </Link>
                         ) : null}
                     </p>
-                    <section className={styles.clips}>
+                    <section className="grid">
                         {props?.programClips?.Clips?.map?.((clip) => {
                             return (
                                 <VerticalCard1
                                     key={`${clip.EmbedUrl}`}
+                                    className="xs-12 s-6 m-4 l-3"
                                     date={clip.PublishState}
                                     duration={`${Math.ceil(
                                         clip.DurationSeconds / 60
