@@ -35,6 +35,18 @@ type Program {
     ContactName: String
     ContactEmail: String
     DefaultPlaylistId: String
+    """
+    Below field is convenient but also causes N+1 problem.
+    Because if you query this field it will perform an extra data-fetch using
+    data needed from the current fetch, usually the ID.
+    """
+    Clips(orgId: String!, cursor: Int, pageSize: Int): Clips
+    """
+    Below field is convenient but also causes N+1 problem.
+    Because if you query this field it will perform an extra data-fetch using
+    data needed from the current fetch, usually the ID.
+    """
+    Playlists(orgId: String!, cursor: Int, pageSize: Int): Playlists
 }`;
 
 export const DirectoryLinksSchema = `
@@ -83,6 +95,13 @@ type Playlist {
     Categories: [String]
     """The podcast directory (Apple Podcasts, Google Podcasts, Spotify) URLs for this playlist."""
     DirectoryLinks: DirectoryLinks
+}`;
+
+export const PlaylistsSchema = `
+type Playlists {
+    Playlists: [Playlist]
+    Cursor: Int
+    pageSize: Int
 }`;
 
 export const ClipChapterSchema = `
@@ -212,7 +231,7 @@ unlisted or private playlists won't appear in the response.
 * \`orgId\` The ID of the Omny Studio organization.
 * \`programId\` The ID of the Omny Studio program.
 """
-playlists(orgId: String!, programId: String!): [Playlist]`;
+playlists(orgId: String!, programId: String!): Playlists`;
 export const PlaylistQuery = `
 """
 Get the metadata for an Omny Studio playlist (which can also be considered a podcast).
@@ -266,6 +285,7 @@ export const OmnySchema = `
 ${ProgramSchema}
 ${DirectoryLinksSchema}
 ${PlaylistSchema}
+${PlaylistsSchema}
 ${ClipChapterSchema}
 ${ClipMonetizationSchema}
 ${RecordingMetadataSchema}

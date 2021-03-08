@@ -1,19 +1,34 @@
-import { buildSchema } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
 import { OmnyQuery, OmnySchema } from '../../../graphql/omny/schemas';
-import { OmnyResolvers } from '../../../graphql/omny/resolvers';
+import {
+    OmnyQueryResolvers,
+    OmnyFieldResolvers,
+} from '../../../graphql/omny/resolvers';
+/**
+ * Use makeExecutableSchema from graphql-tools instead of buildSchema from graphql.js
+ * It's more flexible and allows for field-specific resolving of queries.
+ */
+import { makeExecutableSchema } from '@graphql-tools/schema';
 
-const schema = buildSchema(`
-    ${OmnySchema}
+const typeDefs = `
+${OmnySchema}
 
-    type Query {
-        ${OmnyQuery}
-    }
-`);
+type Query {
+    ${OmnyQuery}
+}
+`;
 
-const rootValue = {
-    ...OmnyResolvers,
+const resolvers = {
+    Query: {
+        ...OmnyQueryResolvers,
+    },
+    ...OmnyFieldResolvers,
 };
+
+const executableSchema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+});
 
 async function handler(req, res) {
     res?.setHeader?.(
@@ -22,8 +37,7 @@ async function handler(req, res) {
     );
 
     return await graphqlHTTP({
-        rootValue,
-        schema,
+        schema: executableSchema,
         graphiql: { headerEditorEnabled: true },
     })(req, res);
 }
