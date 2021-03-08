@@ -158,10 +158,12 @@ export async function getPlaylistDetails(
 
 export async function getPlaylistClips(
     orgId: string,
-    playlistId: string
+    playlistId: string,
+    cursor = 1,
+    pageSize = 10
 ): Promise<Clips> {
     return await fetch(
-        `https://omny.fm/api/orgs/${orgId}/playlists/${playlistId}/clips`
+        `https://omny.fm/api/orgs/${orgId}/playlists/${playlistId}/clips?cursor=${cursor}&pageSize=${pageSize}`
     ).then((res) => res.json());
 }
 
@@ -190,16 +192,13 @@ export async function getClipDetailsExt(
  * @param format optional. Default: JSON
  * @param speakers optional. Default: true
  */
-export function getClipTranscript(
+export async function getClipTranscript(
     orgId: string,
     clipId: string,
-    format:
-        | 'SubRip'
-        | 'WebVTT'
-        | 'Text'
-        | 'TextWithTimestamps'
-        | 'JSON' = 'JSON',
+    format: 'SubRip' | 'WebVTT' | 'Text' | 'TextWithTimestamps' | 'JSON',
     speakers = true
 ) {
-    return `https://omny.fm/api/orgs/${orgId}/clips/${clipId}/transcript?format=${format}&speakers=${speakers}`;
+    return await fetch(
+        `https://omny.fm/api/orgs/${orgId}/clips/${clipId}/transcript?format=${format}&speakers=${speakers}`
+    ).then((res) => res.json());
 }
