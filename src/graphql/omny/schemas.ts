@@ -189,6 +189,7 @@ type Clip {
     ContentRating: String
     """The external ID of the clip."""
     ExternalId: String
+    Program(orgId: String!): Program
 }`;
 
 export const ClipsSchema = `

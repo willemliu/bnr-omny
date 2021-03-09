@@ -16,7 +16,7 @@ export async function ProgramsResolver(_, req) {
 }
 
 export async function ProgramResolver(_, req) {
-    return await getProgramDetails(req?.orgId, req?.programId);
+    return await getProgramDetails(req?.orgId, _?.ProgramId ?? req?.programId);
 }
 
 export async function ProgramClipsResolver(_: Program, req) {
@@ -84,5 +84,8 @@ export const OmnyFieldResolvers = {
     Program: {
         Clips: ProgramClipsResolver,
         Playlists: ProgramPlaylistResolver,
+    },
+    Clip: {
+        Program: ProgramResolver,
     },
 };
