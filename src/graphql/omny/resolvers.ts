@@ -71,6 +71,7 @@ export const OmnyQueryResolvers = {
     playlistClips: PlaylistClipsResolver,
     clip: ClipResolver,
     clipExternal: ClipExternalResolver,
+    clipTranscript: ClipTranscriptResolver,
 };
 
 /**
