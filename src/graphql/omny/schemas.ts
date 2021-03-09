@@ -95,6 +95,7 @@ type Playlist {
     Categories: [String]
     """The podcast directory (Apple Podcasts, Google Podcasts, Spotify) URLs for this playlist."""
     DirectoryLinks: DirectoryLinks
+    Program(orgId: String!): Program
 }`;
 
 export const PlaylistsSchema = `

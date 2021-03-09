@@ -88,4 +88,7 @@ export const OmnyFieldResolvers = {
     Clip: {
         Program: ProgramResolver,
     },
+    Playlist: {
+        Program: ProgramResolver,
+    },
 };
