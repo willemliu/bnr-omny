@@ -28,7 +28,7 @@
         "@fdmg/css-grid": "^2.0.7",
         "@sanity/client": "^2.2.6",
         "@sanity/image-url": "^0.140.22",
-        "@types/node": "^14.14.31",
+        "@types/node": "^18.6.1",
         "@types/react": "^17.0.2",
         "@types/react-dom": "^17.0.1",
         "@typescript-eslint/eslint-plugin": "^4.16.1",
